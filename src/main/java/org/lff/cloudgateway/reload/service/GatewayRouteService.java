@@ -1,4 +1,4 @@
-package com.faza.example.springcloudgatewayroutesfromdatabase.service;
+package org.lff.cloudgateway.reload.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;

@@ -1,4 +1,4 @@
-package com.faza.example.springcloudgatewayroutesfromdatabase.service;
+package org.lff.cloudgateway.reload.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,15 +12,15 @@ import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApiPathRouteLocatorImpl implements RouteLocator {
+public class ReloadRouteLocator implements RouteLocator {
 
-  private static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+  private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
   private final RouteLocatorBuilder routeLocatorBuilder;
 
   private boolean first = true;
 
-  public ApiPathRouteLocatorImpl(RouteLocatorBuilder routeLocatorBuilder) {
+  public ReloadRouteLocator(RouteLocatorBuilder routeLocatorBuilder) {
     this.routeLocatorBuilder = routeLocatorBuilder;
   }
 
@@ -41,13 +41,12 @@ public class ApiPathRouteLocatorImpl implements RouteLocator {
     paths.add("/**");
     PathRoutePredicateFactory.Config pathConfig = new PathRoutePredicateFactory.Config().setPatterns(paths);
 
-    Flux<Route> result = routesBuilder.route(
+    return routesBuilder.route(
             "integration-test", r -> r
                     .predicate(new QueryRoutePredicateFactory().apply(config)).and()
                     .predicate(new PathRoutePredicateFactory().apply(pathConfig))
-                    .filters(f->f.rewritePath("/integration/(?<segment>.*)","/a-integration/${segment}"))
+                    .filters(f->f.rewritePath("/(?<segment>.*)","/ip${segment}"))
                     .uri("http://httpbin.org")
     ).build().getRoutes();
-    return result;
   }
 }

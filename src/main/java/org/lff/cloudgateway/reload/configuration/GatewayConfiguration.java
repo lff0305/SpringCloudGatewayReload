@@ -1,6 +1,6 @@
-package com.faza.example.springcloudgatewayroutesfromdatabase.configuration;
+package org.lff.cloudgateway.reload.configuration;
 
-import com.faza.example.springcloudgatewayroutesfromdatabase.service.ApiPathRouteLocatorImpl;
+import org.lff.cloudgateway.reload.service.ReloadRouteLocator;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +11,6 @@ public class GatewayConfiguration {
   
   @Bean
   public RouteLocator routeLocator(RouteLocatorBuilder routeLocatorBuilder) {
-    return new ApiPathRouteLocatorImpl( routeLocatorBuilder);
+    return new ReloadRouteLocator( routeLocatorBuilder);
   }
 }

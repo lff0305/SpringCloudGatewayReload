@@ -1,4 +1,4 @@
-package com.faza.example.springcloudgatewayroutesfromdatabase;
+package org.lff.cloudgateway.reload;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
