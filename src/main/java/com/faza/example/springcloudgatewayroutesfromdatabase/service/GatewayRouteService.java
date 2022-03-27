@@ -1,6 +1,17 @@
 package com.faza.example.springcloudgatewayroutesfromdatabase.service;
 
-public interface GatewayRouteService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Service;
+
+@Service
+public class GatewayRouteService  {
   
-  void refreshRoutes();
+  @Autowired
+  private ApplicationEventPublisher applicationEventPublisher;
+
+  public void refreshRoutes() {
+    applicationEventPublisher.publishEvent(new RefreshRoutesEvent(this));
+  }
 }
